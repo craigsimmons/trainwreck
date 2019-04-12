@@ -1,0 +1,32 @@
+* {
+ border: 1px solid red;
+}
+
+body {
+background: url(assets/images/rails.jpg);
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-position: center; 
+}
+
+.card {
+    opacity: 0.85;
+    font-weight: bold;
+}
+.jumbotron {
+    background: white;
+    opacity: .80;
+    font-family: 'Baloo', cursive;
+}
+h1 {
+    font-size: 80px;
+    font-weight: bolder;
+    color: green;
+    
+}
+.card-header {
+    font-family: 'Baloo', cursive;
+    font-size: 25px;
+    padding-top: 15px;
+
+}
