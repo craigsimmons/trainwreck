@@ -49,7 +49,7 @@ $(document).ready(function() {
     var startTimeStr = "";
     var frequencyRateStr = "";
     var dateAdded = "";
-    var nextArrival = '';
+    var nextArrival;
     var minsAway;
     // Event handler for adding new trains
 
@@ -89,6 +89,7 @@ $(document).ready(function() {
         trainDestinationStr = $('#destination-input').val().trim();
         startTimeStr = moment($('#time-input').val().trim(), 'HH:mm').format("X");
         frequencyRateInt = $('#frequency-input').val().trim();
+        clearData();
         firebaseCall();
     }
 
@@ -115,7 +116,7 @@ $(document).ready(function() {
         newDataRow = $("<tr>").append(
             $('<td class="dynamic-name">').text(trainNameStr),
             $('<td class="dynamic-dest">').text(trainDestinationStr),
-            $('<td class="dynamic-freq">').text(frequencyRateStr),
+            $('<td class="dynamic-freq">').text('   ' + frequencyRateStr),
             $('<td class="dynamic-arrival">').text(nextArrival),
             $('<td class="dynamic-away">').text(minsAway),
         )
@@ -123,6 +124,25 @@ $(document).ready(function() {
     }
 
     function timeCalc() {
+        var convertedTime = moment(startTimeStr, "HH:mm").subtract(1, "years");
+        console.log(convertedTime);
+        var currentTime = moment();
+        var diffTime = moment().diff(moment(convertedTime), "minutes");
+        console.log("Differennce in time: " + diffTime);
+
+        var timeModulo = diffTime % frequencyRateStr;
+        console.log(timeModulo);
+
+        minsAway = frequencyRateStr - timeModulo;
+        console.log("Minutes until train: " + minsAway);
+
+        nextArrival = moment().add(minsAway, "minutes");
+        nextArrival = moment(nextArrival).format("HH:mm");
+    }
+
+
+
+    /*
         let currentTime = moment();
         let convertedTime = moment(startTimeStr, "HH:mm")
             // .subtract(1, "years");
@@ -148,7 +168,7 @@ $(document).ready(function() {
         console.log("Arrival: " + moment(nextArrival).format("HH:mm"));
         nextArrival = moment(nextArrival).format("HH:mm");
     }
-
+*/
     /*
         let train =firstDeparture
 while currentTime > train +freq

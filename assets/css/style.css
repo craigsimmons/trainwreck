@@ -19,7 +19,7 @@ body {
     opacity: .75;
     font-family: 'Baloo', cursive;
     margin-top: -75px;
-    padding-bottom: -75px;
+    padding-bottom: -100px;
 }
 
 h1 {
@@ -32,12 +32,6 @@ h1 {
     font-family: 'Baloo', cursive;
     font-size: 25px;
     padding-top: 15px;
-    background-color: darkgreen;
-}
-
-.jumbo {
-    font-family: 'Baloo', cursive;
-    font-size: 25px;
     background-color: darkgreen;
 }
 
