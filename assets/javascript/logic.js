@@ -11,7 +11,7 @@ $(document).ready(function() {
     };
     firebase.initializeApp(config);
     let database = firebase.database();
-
+    // Data to initially seed database and browser display
     var seedDataArr = [{
             name: 'Spirit of Seattle',
             destination: 'Toronto',
@@ -58,20 +58,15 @@ $(document).ready(function() {
         addNewTrain();
     });
 
-    // Event hndler for Firebase - when new child object added, get data
+    // Event /listener  for Firebase - when new child object added, get data and call createHTML()
     database.ref().on('child_added', function(childSnapshot) {
         trainNameStr = childSnapshot.val().name;
         trainDestinationStr = childSnapshot.val().destination;
         startTimeStr = childSnapshot.val().start;
         frequencyRateStr = childSnapshot.val().frequency;
-        console.log("****: " + childSnapshot.val());
-        console.log("****: " + trainNameStr);
-        console.log("****: " + trainDestinationStr);
-        console.log("****: " + startTimeStr);
-        console.log("****: " + frequencyRateStr);
         createHTML();
     });
-
+    // seed data population on page load.  seedData() is called on ln79
     function seedData() {
         for (let i = 0; i < seedDataArr.length; i++) {
             trainNameStr = seedDataArr[i].name;
@@ -82,17 +77,17 @@ $(document).ready(function() {
         }
     }
     seedData();
-
+    // Add new Train 
     function addNewTrain() {
         // Grabs user input from form. Use moment.js to format time
         trainNameStr = $('#train-input').val().trim();
         trainDestinationStr = $('#destination-input').val().trim();
         startTimeStr = moment($('#time-input').val().trim(), 'HH:mm').format("X");
         frequencyRateInt = $('#frequency-input').val().trim();
-        clearData();
+        //clearData();
         firebaseCall();
     }
-
+    // calls Firebase and adds data to realtime database (along with a timestamp)
     function firebaseCall() {
         database.ref().push({
             name: trainNameStr,
@@ -102,7 +97,7 @@ $(document).ready(function() {
             dateAdded: firebase.database.ServerValue.TIMESTAMP,
         });
     }
-
+    // Clears key variables
     function clearData() {
         // Clears all of the text-boxes
         $('#train-input').val('');
@@ -110,7 +105,7 @@ $(document).ready(function() {
         $('#time-input').val('');
         $('#frequency-input').val('');
     }
-
+    // Adds new row of <td> elements for each display value. Append to end of display table
     function createHTML() {
         timeCalc();
         newDataRow = $("<tr>").append(
@@ -122,7 +117,7 @@ $(document).ready(function() {
         )
         $("#insert-here").append(newDataRow);
     }
-
+    // logic to format time values and calculate next arrival time and minutes away (from this moment)
     function timeCalc() {
         var convertedTime = moment(startTimeStr, "HH:mm").subtract(1, "years");
         var currentTime = moment();
