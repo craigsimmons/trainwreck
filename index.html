@@ -15,15 +15,17 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
+    <!-- Add Firebase realtime db -->
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-database.js"></script>
     <!-- Latest Bootdtrap css and other stylesheets -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/reset.css">
-    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
     <style>
         body {
-            background: url(assets/images/rails.jpg);
+            background: url(./assets/images/rails.jpg);
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center;
@@ -34,15 +36,15 @@
 <body>
     <div class="container">
         <div class="jumbotron">
+            <br><br>
             <h1 class="text-center">Train Scheduler</h1>
-            <h3 class="text-center">All Aboard!</h3>
         </div>
 
         <div class="card border-primary mb-3">
-            <div class="card-header text-white bg-primary mb-3">Current Train Schedule</div>
+            <div class="card-header text-white card-header mb-3">Current Train Schedule</div>
             <div class="card-body">
                 <table class="table table-hover">
-                    <thead>
+                    <thead class="col">
                         <tr>
                             <th scope="col">Train Name</th>
                             <th scope="col">Destination</th>
@@ -51,15 +53,15 @@
                             <th scope="col">Minutes Away</th>
                         </tr>
                     </thead>
-                    <tbody id="full-table">
-                        <tr>
-                            <td scope="row" id="name"></td>
+                    <tbody id="insert-here">
+                        <!--  <tr>
+                            <td id="dynamic-name"></td>
                             <td id="destination"></td>
                             <td id="frequency"></td>
                             <td id="next-arrival"></td>
                             <td id="minutes-away"></td>
                         </tr>
-
+-->
                     </tbody>
                 </table>
             </div>
@@ -68,31 +70,30 @@
         <!--Add Train-->
 
         <div class="card border-primary mb-3">
-            <div class="card-header text-white bg-primary mb-3">Add Train</div>
+            <div class="card-header text-white mb-3">Add Train</div>
             <div class="card-body">
-                <form method="POST" action="form-handler" onsubmit="return checkForm(this);">
-                    <!-- form class="needs-validation" novalidate> -->
+                <form id="target-form" method="POST" action="form-handler">
                     <div class="form-group">
-                        <label for="train-name">Train Name</label>
-                        <input class="form-control" id="train-name" type="text" required>
+                        <label for="train-input">Train Name</label>
+                        <input class="form-control" id="train-input" type="text" required>
                         <div class="invalid-feedback" id="invalid-name"></div>
                     </div>
                     <div class="form-group">
-                        <label for="train-destination">Destination</label>
-                        <input class="form-control" id="train-destination" type="text" required>
+                        <label for="destination-input">Destination</label>
+                        <input class="form-control" id="destination-input" type="text" required>
                         <div class="invalid-feedback" id="invalid-destination"></div>
                     </div>
                     <div class="form-group" id="firstTime">
-                        <label for="train-first-time">First Train Time (HH:mm - military time)</label>
-                        <input class="form-control" id="train-first-time" type="text" required>
+                        <label for="time-input">First Train Time (HH:mm - military time)</label>
+                        <input class="form-control" id="time-input" type="text" required>
                         <div class="invalid-feedback" id="invalid-time"></div>
                     </div>
                     <div class="form-group">
-                        <label for="train-frequency">Frequency (min)</label>
-                        <input class="form-control" id="train-frequency" type="number" min="1" required>
+                        <label for="frequency-input">Frequency (min)</label>
+                        <input class="form-control" id="frequency-input" type="number" min="1" required>
                         <div class="invalid-feedback" id="invalid-frequency"></div>
                     </div>
-                    <button class="btn btn-primary" id="submit-button" type="submit">Submit</button>
+                    <button class="btn jumbo" id="submit-button" type="submit">Submit</button>
                 </form>
             </div>
         </div>
@@ -101,7 +102,7 @@
     </div>
 
     <!--Craig's JavaScript-->
-    <script src="javascript/logic.js"></script>
+    <script src="./assets/javascript/logic.js"></script>
 </body>
 
 </html>

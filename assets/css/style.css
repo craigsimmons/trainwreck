@@ -1,32 +1,47 @@
-* {
- border: 1px solid red;
-}
-
 body {
-background: url(assets/images/rails.jpg);
-background-repeat: no-repeat;
-background-attachment: fixed;
-background-position: center; 
+    background: url(./assets/images/rails.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 .card {
-    opacity: 0.85;
+    opacity: 0.75;
     font-weight: bold;
 }
+
 .jumbotron {
-    background: white;
-    opacity: .80;
+    background-color: darkgreen;
+    opacity: .75;
     font-family: 'Baloo', cursive;
+    margin-top: -75px;
+    padding-bottom: -100px;
 }
+
 h1 {
     font-size: 80px;
     font-weight: bolder;
-    color: green;
-    
+    color: white;
 }
+
 .card-header {
     font-family: 'Baloo', cursive;
     font-size: 25px;
     padding-top: 15px;
+    background-color: darkgreen;
+}
 
+.jumbo {
+    font-family: 'Baloo', cursive;
+    font-size: 25px;
+    background-color: darkgreen;
+    color: white;
+}
+
+.col {
+    color: darkgreen;
+}
+
+.dynamic-freq {
+    margin-left: 10px;
 }
